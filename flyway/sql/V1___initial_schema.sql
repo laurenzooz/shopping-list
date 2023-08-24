@@ -6,7 +6,7 @@ CREATE TABLE users (
 
 CREATE TABLE shopping_lists (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
+  name TEXT NOT NULL
 );
 
 CREATE TABLE shopping_list_items (
