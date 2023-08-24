@@ -1,7 +1,7 @@
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   email VARCHAR(255) UNIQUE,
-  password CHAR(60),
+  password CHAR(60)
 );
 
 CREATE TABLE shopping_lists (
