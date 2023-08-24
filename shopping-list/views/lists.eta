@@ -1,0 +1,17 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Your shopping lists</h1>
+
+<nav>
+	<ul>
+		<li><a href = "/" role="button">Index</a></li>
+	</ul>
+	<ul>
+
+
+		<li><a href = "/auth/login " role="button" class = "secondary outline">Login</a></li>
+		<li><a href = "/auth/register " role="button" class = "secondary outline">Register</a></li>
+	</ul>
+</nav>
+
+<hr> 

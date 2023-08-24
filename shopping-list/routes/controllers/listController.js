@@ -1,5 +1,5 @@
 const showIndex = async ({ render }) => {
-		render("index.eta");
+		render("lists.eta");
 }
 	
 export { showIndex };
