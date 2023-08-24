@@ -1,6 +1,6 @@
 <% layout("./layouts/layout.eta") %>
 
-<h1>Your shopping lists</h1>
+<h1>Manage your shopping lists</h1>
 
 <nav>
 	<ul>
@@ -15,3 +15,14 @@
 </nav>
 
 <hr> 
+
+
+<h2>Existing lists:</h2>
+
+<div style="width: 30%;">
+<form method = "POST" action = "/lists">
+    Create a new shopping list: </br><input type = "text" name = "list_name" value = "<%=it.data.question%>"/></br>
+    <div style="width: 30%;"><input type = "submit" value = "Create" /></div>
+</form>
+</div>
+

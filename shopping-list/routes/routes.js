@@ -6,7 +6,8 @@ const router = new Router();
 
 router.get("/", indexController.showIndex);
 
-// open user's shopping lists
-router.get("/lists", listController.showLists);
+router.get("/lists", listController.showLists); // open user's shopping lists
+
+router.post("/lists", listController.addList); // Create a new shopping list
 
 export { router };
