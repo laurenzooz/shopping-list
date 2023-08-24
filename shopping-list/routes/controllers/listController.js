@@ -1,6 +1,6 @@
-const showIndex = async ({ render }) => {
+const showLists = async ({ render }) => {
 		render("lists.eta");
 }
 	
-export { showIndex };
+export { showLists };
 	

@@ -7,6 +7,6 @@ const router = new Router();
 router.get("/", indexController.showIndex);
 
 // open user's shopping lists
-router.get("/lists/:user_id", indexController.showIndex);
+router.get("/lists", listController.showLists);
 
 export { router };
