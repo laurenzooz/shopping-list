@@ -1,0 +1,36 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Shopping list "name"</h1>
+
+<nav>
+	<ul>
+		<li><a href = "/" role="button">Index</a></li>
+		<li><a href = "/lists" role="button">My shopping lists</a></li>
+	</ul>
+	<ul>
+
+
+		<li><a href = "/auth/login " role="button" class = "secondary outline">Login</a></li>
+		<li><a href = "/auth/register " role="button" class = "secondary outline">Register</a></li>
+	</ul>
+</nav>
+
+<hr> 
+
+
+<h2>Items in list "name here"</h2>
+
+<ul>
+<%it.items.forEach(item => {%>
+    <li><%=item.name%></li>
+    <%});%>
+</ul>
+
+
+<div style="width: 30%;">
+<form method = "POST" action = "/lists/2">
+    Add an item to the list: </br><input type = "text" name = "item_name"/></br>
+    <div style="width: 30%;"><input type = "submit" value = "Add" /></div>
+</form>
+</div>
+
