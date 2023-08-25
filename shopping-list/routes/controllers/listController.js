@@ -1,9 +1,8 @@
 import * as listService from  "../../services/listService.js";
 
 const showLists = async ({ render }) => {
-		render("lists.eta");
+		render("lists.eta", {lists: await listService.listLists()});
 }
-
 
 const addList = async ({ request, response, params, render }) => {
 
@@ -15,8 +14,6 @@ const addList = async ({ request, response, params, render }) => {
 	console.log(listName); // user id temporarily 0
 
 	response.redirect(`/lists`);
-    
-
 }
 	
 export { showLists, addList };

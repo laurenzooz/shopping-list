@@ -19,6 +19,13 @@
 
 <h2>Existing lists:</h2>
 
+<ul>
+<%it.lists.forEach(list => {%>
+    <li><a href = "/<%=list.id%>" style="font-size:120%;"><%=list.name%></a></li>
+    <%});%>
+</ul>
+
+
 <div style="width: 30%;">
 <form method = "POST" action = "/lists">
     Create a new shopping list: </br><input type = "text" name = "list_name"/></br>
