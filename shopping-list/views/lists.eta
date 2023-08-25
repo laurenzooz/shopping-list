@@ -21,7 +21,7 @@
 
 <ul>
 <%it.lists.forEach(list => {%>
-    <li><a href = "/<%=list.id%>" style="font-size:120%;"><%=list.name%></a></li>
+    <li><a href = "lists/<%=list.id%>" style="font-size:120%;"><%=list.name%></a></li>
     <%});%>
 </ul>
 
