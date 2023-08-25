@@ -2,7 +2,7 @@ services:
   shopping-list:
     build: shopping-list
     image: shopping-list
-    restart: "always"
+    restart: "no"
     volumes:
       - ./shopping-list/:/app
     ports:
@@ -16,7 +16,7 @@ services:
   database:
     container_name: laurenzooz-shopping-list-db
     image: postgres:latest
-    restart: "always"
+    restart: "no"
     env_file:
         - project.env
 
