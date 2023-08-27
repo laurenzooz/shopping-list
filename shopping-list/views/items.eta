@@ -28,7 +28,7 @@
 
 
 <div style="width: 30%;">
-<form method = "POST" action = "/lists/2">
+<form method = "POST" action = "/lists/<%=it.id%>">
     Add an item to the list: </br><input type = "text" name = "item_name"/></br>
     <div style="width: 30%;"><input type = "submit" value = "Add" /></div>
 </form>

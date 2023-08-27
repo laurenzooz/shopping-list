@@ -1,7 +1,8 @@
 import * as itemService from  "../../services/itemService.js";
 
-const showItems = async ({ render }) => {
-		render("items.eta", {items: await itemService.listItems(2)});
+const showItems = async ({ render, params }) => {
+
+	return render("items.eta", {items: await itemService.listItems(params.id), id: params.id});
 }
 
 const addItem = async ({ request, response, params, render }) => {
@@ -10,9 +11,9 @@ const addItem = async ({ request, response, params, render }) => {
 	const body = request.body({ type: "form" });
 	const formData = await body.value;
 	const itemName = formData.get("item_name");
-	await itemService.addItem(itemName, 2);
-
-	return response.redirect(`/`);
+	await itemService.addItem(itemName, params.id);
+	
+	return response.redirect(`/lists/${params.id}`);
 }
 	
 export { showItems, addItem };
