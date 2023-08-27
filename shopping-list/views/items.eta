@@ -22,7 +22,17 @@
 
 <ul>
 <%it.items.forEach(item => {%>
-    <li><%=item.name%></li>
+
+    <% if (item.collected) {%>
+ 		<del><%= item.name %></del>
+	<%} else {%>
+		<%= item.name %>
+
+	<%}%>
+	
+	<form method="POST" action="/lists/<%=it.id%>/collect/<%=item.id%>">
+      <input type="submit" value="Mark collected!" />
+    </form>
     <%});%>
 </ul>
 

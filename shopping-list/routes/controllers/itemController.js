@@ -2,6 +2,8 @@ import * as itemService from  "../../services/itemService.js";
 
 const showItems = async ({ render, params }) => {
 
+	//console.log(params.id);
+
 	return render("items.eta", {items: await itemService.listItems(params.id), id: params.id});
 }
 
@@ -15,6 +17,12 @@ const addItem = async ({ request, response, params, render }) => {
 	
 	return response.redirect(`/lists/${params.id}`);
 }
+
+const collectItem = async ({ request, response, params, render }) => {	
 	
-export { showItems, addItem };
+	await itemService.collectItem(params.item_id); 
+
+	return response.redirect(`/lists/${params.list_id}`);
+};	
+export { showItems, addItem, collectItem };
 	

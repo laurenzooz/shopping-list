@@ -6,8 +6,12 @@ const addItem = async(name, id) => { // adds new item to the list by id
 }
 
 const listItems = async(id) => { // lists all the items in the shopping list with the given id 
-	return await sql `SELECT * FROM shopping_list_items WHERE shopping_list_id = ${id}`;
-	
+	return await sql `SELECT * FROM shopping_list_items WHERE shopping_list_id = ${id}`;	
 }
 
-export { addItem, listItems }
+const collectItem = async (id) => {
+	//console.log(id);
+	await sql`UPDATE shopping_list_items SET collected = true WHERE id = ${id};`;
+};
+
+export { addItem, listItems, collectItem }
