@@ -11,6 +11,7 @@ router.get("/", indexController.showIndex);
 // authentication
 router.get("/auth/login", userController.showLoginForm);
 router.post("/auth/login", userController.processLogin);
+router.get("/auth/login/out", userController.logout);
 
 router.get("/auth/register", userController.showRegistrationForm);
 router.post("/auth/register", userController.registerUser);

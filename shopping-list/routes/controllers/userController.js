@@ -33,9 +33,16 @@ const processLogin = async ({ request, response, state }) => {
 	response.redirect("/lists");
 }
 
-const showLoginForm = ({ render, user }) => {
-  render("login.eta", {loginError: loginError, is_logged: (user)});
+const showLoginForm = async ({ render, user }) => {
+	render("login.eta", {loginError: loginError, is_logged: (user)});
 }
+
+const logout = async ({ render, user, response, state }) => {
+	
+	await state.session.deleteSession(user);
+	response.redirect("/");
+}
+
 
 const registerUser = async ({ request, response, render, user }) => {
 	const body = request.body({ type: "form" });
@@ -73,4 +80,4 @@ const showRegistrationForm = ({ render, user }) => {
 	render("register.eta", data);
 }
 
-export { processLogin, showLoginForm, registerUser, showRegistrationForm};
+export { processLogin, showLoginForm, logout, registerUser, showRegistrationForm};
