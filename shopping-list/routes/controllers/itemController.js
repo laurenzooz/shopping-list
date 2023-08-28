@@ -15,7 +15,15 @@ const addItem = async ({ request, response, params, render }) => {
 	const body = request.body({ type: "form" });
 	const formData = await body.value;
 	const itemName = formData.get("item_name");
-	await itemService.addItem(itemName, params.id);
+
+	let position = 0;
+	const row = await itemService.highestPosition(params.id);
+	if (row)
+	{
+		position = row.position + 1;
+	}
+
+	await itemService.addItem(itemName, position, params.id);
 	
 	response.redirect(`/lists/${params.id}`);
 }
@@ -27,5 +35,30 @@ const collectItem = async ({ request, response, params, render, user }) => {
 
 	response.redirect(`/lists/${params.list_id}`);
 };	
-export { showItems, addItem, collectItem };
+
+
+const moveUp = async ({ request, response, params, render }) => {
+	
+	let limit = 0;
+	const row = await itemService.highestPosition(params.list_id);
+	if (row)
+	{
+		limit = row.position;
+	}
+
+	await itemService.moveUp(params.item_id, limit);
+ 
+	response.redirect(`/lists/${params.list_id}`);
+}
+
+const moveDown = async ({ request, response, params, render }) => {
+	
+
+	await itemService.moveDown(params.item_id);
+ 
+	response.redirect(`/lists/${params.list_id}`);
+}
+
+
+export { showItems, addItem, collectItem, moveUp, moveDown };
 	
