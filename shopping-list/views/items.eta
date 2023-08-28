@@ -1,6 +1,6 @@
 <% layout("./layouts/layout.eta") %>
 
-<h1>Shopping list "name"</h1>
+<h1>Shopping list application</h1>
 
 <nav>
 	<ul>
@@ -18,7 +18,7 @@
 <hr> 
 
 
-<h2>Items in list "name here"</h2>
+<h2>Items in the list:</h2>
 
 <ul>
 <%it.items.forEach(item => {%>
@@ -37,10 +37,8 @@
 </ul>
 
 
-<div style="width: 30%;">
 <form method = "POST" action = "/lists/<%=it.id%>">
     Add an item to the list: </br><input type = "text" name = "item_name"/></br>
     <div style="width: 30%;"><input type = "submit" value = "Add" /></div>
 </form>
-</div>
 
