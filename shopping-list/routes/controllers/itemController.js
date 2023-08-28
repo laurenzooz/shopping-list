@@ -1,12 +1,13 @@
 import * as itemService from  "../../services/itemService.js";
 
-const showItems = async ({ render, params }) => {
+const showItems = async ({ render, params, user }) => {
 
 	//console.log(params.id);
 
 	render("items.eta", {uncollectedItems: await itemService.listUncollectedItems(params.id), 
 		collectedItems: await itemService.listCollectedItems(params.id),
-		id: params.id});
+		id: params.id,
+		is_logged: (user)});
 }
 
 const addItem = async ({ request, response, params, render }) => {

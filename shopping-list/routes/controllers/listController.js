@@ -1,7 +1,7 @@
 import * as listService from  "../../services/listService.js";
 
 const showLists = async ({ render, user }) => {
-	render("lists.eta", {lists: await listService.listLists(user.id)});
+	render("lists.eta", {lists: await listService.listLists(user.id), is_logged: (user)});
 }
 
 const addList = async ({ request, response, user, params, render }) => {

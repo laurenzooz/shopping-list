@@ -8,9 +8,13 @@
 		<li><a href = "/lists" role="button">My shopping lists</a></li>
 	</ul>
 	<ul>
+	<%if (!it.is_logged) {%>
 
-
-		<li><a href = "/auth/register " role="button" class = "secondary outline">Register</a></li>
+		<li><a href = "/auth/register" role="button" class = "secondary outline">Register</a></li>
+	
+	<%} else {%>
+		<li><a href = "/auth/login/out" role="button" class = "secondary outline">Log out</a></li>
+	<%}%>
 	</ul>
 </nav>
 
