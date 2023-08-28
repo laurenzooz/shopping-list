@@ -17,23 +17,23 @@
 
 <hr> 
 
-
 <h2>Items in the list:</h2>
 
 <ul>
-<%it.items.forEach(item => {%>
-
-    <% if (item.collected) {%>
- 		<del><%= item.name %></del>
-	<%} else {%>
-		<%= item.name %>
-
-	<%}%>
-	
+<%it.uncollectedItems.forEach(item => {%>
+    
+	<li><%= item.name %></li>
 	<form method="POST" action="/lists/<%=it.id%>/collect/<%=item.id%>">
-     <div style="width: 30%;"><input type="submit" value="Collect" /></div>
-    </form>
+		<div style="width: 30%;"><input type="submit" value="Collect" /></div>
+	</form>
+	
     <%});%>
+</ul>
+
+<ul>
+<%it.collectedItems.forEach(item => {%>
+	<li><del><%= item.name %></del></li>
+<%});%>
 </ul>
 
 

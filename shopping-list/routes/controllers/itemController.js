@@ -4,7 +4,9 @@ const showItems = async ({ render, params }) => {
 
 	//console.log(params.id);
 
-	render("items.eta", {items: await itemService.listItems(params.id), id: params.id});
+	render("items.eta", {uncollectedItems: await itemService.listUncollectedItems(params.id), 
+		collectedItems: await itemService.listCollectedItems(params.id),
+		id: params.id});
 }
 
 const addItem = async ({ request, response, params, render }) => {
