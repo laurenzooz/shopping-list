@@ -1,0 +1,31 @@
+<% layout("./layouts/layout.eta") %>
+
+<h1>Shopping list application</h1>
+
+<nav>
+	<ul>
+		<li><a href = "/" role="button">Index</a></li>
+		<li><a href = "/lists" role="button">My shopping lists</a></li>
+	</ul>
+	<ul>
+
+
+		<li><a href = "/auth/register " role="button" class = "secondary outline">Register</a></li>
+	</ul>
+</nav>
+
+<hr> 
+
+<h2>Login</h2>
+
+
+<%if (it.loginError.length > 0) {%>
+<ul><li><%=it.loginError%></li></ul>
+<%}%>
+<form method="POST" action="/auth/login">
+  Email:<br/>
+  <input type="email" name="email" /><br/>
+  Password:<br/>
+  <input type="password" name="password" /><br/>
+  <input type="submit" value="Login" />
+</form>
