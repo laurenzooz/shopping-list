@@ -20,9 +20,10 @@ const addItem = async ({ request, response, params, render }) => {
 	response.redirect(`/lists/${params.id}`);
 }
 
-const collectItem = async ({ request, response, params, render }) => {	
+const collectItem = async ({ request, response, params, render, user }) => {	
 	
-	await itemService.collectItem(params.item_id); 
+	
+	await itemService.collectItem(params.item_id, user.id); 
 
 	response.redirect(`/lists/${params.list_id}`);
 };	
