@@ -59,6 +59,7 @@ const registerUser = async ({ request, response, render }) => {
 }
   
 const showRegistrationForm = ({ render }) => {
+	loginError = "";
 	const data = { email: "", password: "" , errors: null };
 	render("register.eta", data);
 }
