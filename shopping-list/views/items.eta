@@ -31,7 +31,7 @@
 	<%}%>
 	
 	<form method="POST" action="/lists/<%=it.id%>/collect/<%=item.id%>">
-      <input type="submit" value="Mark collected!" />
+     <div style="width: 30%;"><input type="submit" value="Collect" /></div>
     </form>
     <%});%>
 </ul>
