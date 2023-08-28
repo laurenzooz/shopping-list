@@ -27,8 +27,16 @@
 <%it.uncollectedItems.forEach(item => {%>
     
 	<li><%= item.name %></li>
-	<form method="POST" action="/lists/<%=it.id%>/collect/<%=item.id%>">
+	<form method="POST" action="/lists/<%=it.id%>/<%=item.id%>/collect">
 		<div style="width: 30%;"><input type="submit" value="Collect" /></div>
+	</form>
+
+	<form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/up">
+    <div style="width: 10%;"><input type = "submit" value = "↑" /></div>
+	</form>
+
+	<form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/down">
+    <div style="width: 10%;"><input type = "submit" value = "↓" /></div>
 	</form>
 	
     <%});%>
