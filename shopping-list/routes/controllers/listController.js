@@ -10,15 +10,15 @@ const addList = async ({ request, response, params, render }) => {
 	const body = request.body({ type: "form" });
 	const formData = await body.value;
 	const listName = formData.get("list_name");
-	listService.addList(listName);
-	console.log(listName); // user id temporarily 0
+	
+	await listService.addList(listName);
 
 	response.redirect(`/lists`);
 }
 	
 const deleteList = async ({ request, response, params, render }) => {
 	
-	listService.deleteList(params.id);
+	await listService.deleteList(params.id);
  
 	response.redirect(`/lists`);
 }
