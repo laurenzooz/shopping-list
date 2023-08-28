@@ -1,7 +1,7 @@
 import * as listService from  "../../services/listService.js";
 
 const showLists = async ({ render }) => {
-		render("lists.eta", {lists: await listService.listLists()});
+	render("lists.eta", {lists: await listService.listLists()});
 }
 
 const addList = async ({ request, response, params, render }) => {
@@ -16,5 +16,12 @@ const addList = async ({ request, response, params, render }) => {
 	response.redirect(`/lists`);
 }
 	
-export { showLists, addList };
+const deleteList = async ({ request, response, params, render }) => {
+	
+	listService.deleteList(params.id);
+ 
+	response.redirect(`/lists`);
+}
+
+export { showLists, addList, deleteList };
 	
