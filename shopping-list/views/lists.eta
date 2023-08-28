@@ -23,23 +23,30 @@
 
 <h2>Your shopping lists:</h2>
 
-<ul>
+<% if (it.lists.length === 0){%><p>No shopping lists yet.</p><%}%>
+
+
 <%it.lists.forEach(list => {%>
-    <li><a href = "lists/<%=list.id%>" style="font-size:120%;"><%=list.name%></a></li>
+<nav>
+
+    <ul><li><a href = "lists/<%=list.id%>" role="button"><%=list.name%></a></li></ul>
 	
-	<form method = "POST" action = "/lists/<%=list.id%>/delete">
-    <div style="width: 30%;"><input type = "submit" value = "Delete" /></div>
-	</form>
+	<ul><li><form method = "POST" action = "/lists/<%=list.id%>/delete">
+	<input type = "submit" role="button" class = "secondary outline" value = "Delete" />
+	</form></li>
 
-	<form method = "POST" action = "/lists/<%=list.id%>/up">
-    <div style="width: 10%;"><input type = "submit" value = "↑" /></div>
-	</form>
+	<li><form method = "POST" action = "/lists/<%=list.id%>/up">
+    <input type = "submit" role="button" class = "secondary outline" value = "↑" />
+	</form></li>
 
-	<form method = "POST" action = "/lists/<%=list.id%>/down">
-    <div style="width: 10%;"><input type = "submit" value = "↓" /></div>
-	</form>
-    <%});%>
-</ul>
+	<li><form method = "POST" action = "/lists/<%=list.id%>/down">
+    <input type = "submit" role="button" class = "secondary outline" value = "↓" />
+	</form></li></ul>
+</nav>
+
+<%});%>
+
+<hr> 
 
 
 <form method = "POST" action = "/lists">

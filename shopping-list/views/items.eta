@@ -21,32 +21,43 @@
 
 <hr> 
 
-<h2>Items in the list:</h2>
+<h2>Items on the list:</h2>
+<% if (it.uncollectedItems.length === 0 && it.collectedItems.length === 0){%><p>No items yet.</p><%}%>
 
-<ul>
+
 <%it.uncollectedItems.forEach(item => {%>
-    
-	<li><%= item.name %></li>
-	<form method="POST" action="/lists/<%=it.id%>/<%=item.id%>/collect">
-		<div style="width: 30%;"><input type="submit" value="Collect" /></div>
-	</form>
+<nav>
 
-	<form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/up">
-    <div style="width: 10%;"><input type = "submit" value = "↑" /></div>
-	</form>
+	<ul><li><form method="POST" action="/lists/<%=it.id%>/<%=item.id%>/collect">
+	<input type="submit" value="<%= item.name %>" />
+	</form></li></ul>
 
-	<form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/down">
-    <div style="width: 10%;"><input type = "submit" value = "↓" /></div>
-	</form>
-	
-    <%});%>
-</ul>
+	<ul><li><form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/up">
+    <input type = "submit" role="button" class = "secondary outline" value = "↑" />
+	</form></li>
+
+	<li><form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/down">
+    <input type = "submit" role="button" class = "secondary outline" value = "↓" />
+	</form></li></ul>
+
+</nav>
+<%});%>
+
+
+<hr>
+
+<% if (it.collectedItems.length > 0){%><p>Collected items:</p><%}%>
 
 <ul>
 <%it.collectedItems.forEach(item => {%>
 	<li><del><%= item.name %></del></li>
 <%});%>
 </ul>
+
+<% if (it.collectedItems.length === 0 && it.uncollectedItems.length !== 0){%><p>Click the item name to mark it as collected!</p><%}%>
+
+<% if (it.uncollectedItems.length !== 0){%><hr><%}%>
+
 
 
 <form method = "POST" action = "/lists/<%=it.id%>">
