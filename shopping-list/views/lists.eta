@@ -22,8 +22,17 @@
 <ul>
 <%it.lists.forEach(list => {%>
     <li><a href = "lists/<%=list.id%>" style="font-size:120%;"><%=list.name%></a></li>
+	
 	<form method = "POST" action = "/lists/<%=list.id%>/delete">
     <div style="width: 30%;"><input type = "submit" value = "Delete" /></div>
+	</form>
+
+	<form method = "POST" action = "/lists/<%=list.id%>/up">
+    <div style="width: 10%;"><input type = "submit" value = "↑" /></div>
+	</form>
+
+	<form method = "POST" action = "/lists/<%=list.id%>/down">
+    <div style="width: 10%;"><input type = "submit" value = "↓" /></div>
 	</form>
     <%});%>
 </ul>

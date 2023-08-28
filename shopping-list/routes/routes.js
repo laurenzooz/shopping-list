@@ -20,6 +20,9 @@ router.get("/lists", listController.showLists); // user's shopping lists
 router.post("/lists", listController.addList); // Create a new shopping list
 router.post("/lists/:id/delete", listController.deleteList);
 
+router.post("/lists/:id/up", listController.moveUp); // change the order
+router.post("/lists/:id/down", listController.moveDown);
+
 // items in lists
 router.get("/lists/:id", itemController.showItems); // a specific list
 router.post("/lists/:id", itemController.addItem); 

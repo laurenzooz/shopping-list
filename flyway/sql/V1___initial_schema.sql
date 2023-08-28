@@ -7,14 +7,14 @@ CREATE TABLE users (
 CREATE TABLE shopping_lists (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users(id),
-	position INTEGER,
+	position INTEGER DEFAULT 0,
 	name TEXT NOT NULL
 );
 
 CREATE TABLE shopping_list_items (
 	id SERIAL PRIMARY KEY,
 	shopping_list_id INTEGER REFERENCES shopping_lists(id),
-	position INTEGER,
+	position INTEGER DEFAULT 0,
 	name TEXT NOT NULL,
 	collected BOOLEAN DEFAULT FALSE
 );
