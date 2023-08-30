@@ -54,7 +54,7 @@
 
 <ul>
 <%it.collectedItems.forEach(item => {%>
-	<li><del><%= item.name %></del></li>
+	<li><del><a href = "/lists/<%=it.id%>/<%=item.id%>/uncollect"  style="color:red;"><%= item.name %></a></del></li>
 <%});%>
 </ul>
 
@@ -66,6 +66,8 @@
 
 <form method = "POST" action = "/lists/<%=it.id%>">
     Add an item to the list: </br><input type = "text" name = "item_name"/></br>
+
+	
     <div style="width: 30%;"><input type = "submit" value = "Add" /></div>
 </form>
 

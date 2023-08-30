@@ -30,6 +30,22 @@ const collectItem = async (item_id, user_id) => {
 
 };
 
+const uncollectItem = async (item_id, user_id) => {
+	
+	// can only collect own items
+	const item = await sql `SELECT * FROM shopping_list_items WHERE id = ${item_id}`;
+	const list_id = item[0].shopping_list_id; 
+	// get the shopping list id, then it's user id, and check that it matches with the user
+	// who's trying to collect
+
+	const list = await sql `SELECT * FROM shopping_lists WHERE id = ${list_id}`;
+
+	if (list[0].user_id === user_id) {
+		await sql`UPDATE shopping_list_items SET collected = false WHERE id = ${item_id};`;
+	}
+
+};
+
 const deleteItem = async(list_id, user_id, item_id) => { 
 	// deletes items in the list first, then the list
 
@@ -80,4 +96,4 @@ const moveDown = async(item_id) => {
 	}
 }
 
-export { addItem, listUncollectedItems, listCollectedItems, collectItem, deleteItem, highestPosition, lowestPosition, moveUp, moveDown }
+export { addItem, listUncollectedItems, listCollectedItems, collectItem, uncollectItem, deleteItem, highestPosition, lowestPosition, moveUp, moveDown }
