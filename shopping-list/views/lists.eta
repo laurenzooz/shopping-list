@@ -32,7 +32,7 @@
     <ul><li><a href = "lists/<%=list.id%>" role="button"><%=list.name%></a></li></ul>
 	
 	<ul><li><form method = "POST" action = "/lists/<%=list.id%>/delete">
-	<input type = "submit" role="button" class = "secondary outline" value = "Delete" />
+	<input type = "submit" role="button" class = "secondary outline" value = "X" />
 	</form></li>
 
 	<li><form method = "POST" action = "/lists/<%=list.id%>/up">
