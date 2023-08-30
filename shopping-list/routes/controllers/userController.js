@@ -30,7 +30,7 @@ const processLogin = async ({ request, response, state }) => {
 
 	await state.session.set("user", user);
 	loginError = ""; // reset errors to empty
-	response.redirect("/lists");
+	response.redirect("/");
 }
 
 const showLoginForm = async ({ render, user }) => {
