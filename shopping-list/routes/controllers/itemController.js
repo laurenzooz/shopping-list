@@ -30,12 +30,14 @@ const addItem = async ({ request, response, params, render }) => {
 }
 
 const collectItem = async ({ request, response, params, render, user }) => {	
-	
-	
 	await itemService.collectItem(params.item_id, user.id); 
-
 	response.redirect(`/lists/${params.list_id}`);
 };	
+
+const deleteItem = async ({ request, response, params, render, user }) => {
+	await itemService.deleteItem(params.list_id, user.id, params.item_id);
+	response.redirect(`/lists`);
+}
 
 
 const moveUp = async ({ request, response, params, render }) => {
@@ -61,5 +63,5 @@ const moveDown = async ({ request, response, params, render }) => {
 }
 
 
-export { showItems, addItem, collectItem, moveUp, moveDown };
+export { showItems, addItem, collectItem, deleteItem, moveUp, moveDown };
 	

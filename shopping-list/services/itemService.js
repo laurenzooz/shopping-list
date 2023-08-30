@@ -30,6 +30,18 @@ const collectItem = async (item_id, user_id) => {
 
 };
 
+const deleteItem = async(list_id, user_id, item_id) => { 
+	// deletes items in the list first, then the list
+
+	// check that the user id matches
+	const list = await sql `SELECT * FROM shopping_lists WHERE id = ${list_id}`;
+	
+	if (list[0].user_id === user_id) {
+		await sql `DELETE FROM shopping_list_items WHERE id = ${item_id}`;
+	}
+	
+}
+
 
 // returns the highest order number
 const highestPosition = async(list_id) => { 
@@ -68,4 +80,4 @@ const moveDown = async(item_id) => {
 	}
 }
 
-export { addItem, listUncollectedItems, listCollectedItems, collectItem, highestPosition, lowestPosition, moveUp, moveDown }
+export { addItem, listUncollectedItems, listCollectedItems, collectItem, deleteItem, highestPosition, lowestPosition, moveUp, moveDown }
