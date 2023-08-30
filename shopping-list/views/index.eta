@@ -23,5 +23,13 @@
 
 <hr> 
 
-<p>Sign up and start creating shopping lists!</p>
+<p>This is a shopping list web application written in JavaScript, using Deno runtime and Oak framework.</p>
+<p>Once you have registered and signed in, head over to 'My shopping lists' 
+where you can create new shopping lists as well as manage existing ones.
+Open the list by clicking its name to add and manage items on that specific list.
+Click the item name to mark it as collected. If you collect an item by accident, you can 
+retrieve it by clicking the item name with the red striked-through text.</p>
+<p>You can order the items and lists with the arrow buttons, and delete them by pressing the button
+with 'X' symbol.</p>
+
 
