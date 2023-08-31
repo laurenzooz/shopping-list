@@ -11,19 +11,5 @@
 }
 
 .draggable.dragging {
-	opacity: 0.6;
+	background-color: rgba(80, 80, 146, 0.5);
 }
-
-/*
-.dropArea {
-
-	min-width: 5rem;
-	min-height: 1rem;
-
-	padding-left: 1rem;
-	padding-right: 1rem;
-	margin-top: 1rem;
-	outline-style: dashed;
-	outline-width: thin;
-	opacity: 0.1;
-}*/
