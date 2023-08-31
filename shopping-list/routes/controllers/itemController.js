@@ -41,7 +41,7 @@ const uncollectItem = async ({ request, response, params, render, user }) => {
 
 const deleteItem = async ({ request, response, params, render, user }) => {
 	await itemService.deleteItem(params.list_id, user.id, params.item_id);
-	response.redirect(`/lists`);
+	response.redirect(`/lists/${params.list_id}`);
 }
 
 
