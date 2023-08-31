@@ -27,7 +27,9 @@
 
 
 <%it.lists.forEach(list => {%>
-<nav>
+<div class="draggable" draggable="true"><nav>
+
+
 
     <ul><li><a href = "lists/<%=list.id%>" role="button"><%=list.name%></a></li></ul>
 	
@@ -42,8 +44,7 @@
 	<li><form method = "POST" action = "/lists/<%=list.id%>/down">
     <input type = "submit" role="button" class = "secondary outline" value = "↓" />
 	</form></li></ul>
-</nav>
-
+</div></nav>
 <%});%>
 
 <hr> 
