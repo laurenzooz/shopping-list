@@ -29,6 +29,8 @@
 <% if (it.lists.length === 0){%><p>No shopping lists yet.</p><%}%>
 
 
+<div class="dropArea">
+
 <%it.lists.forEach(list => {%>
 <div class="draggable" draggable="true"><nav>
 
@@ -49,6 +51,7 @@
 	</form></li></ul>
 </div></nav>
 <%});%>
+</div>
 
 <hr> 
 

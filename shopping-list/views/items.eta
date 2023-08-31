@@ -30,6 +30,8 @@
 <% if (it.uncollectedItems.length === 0 && it.collectedItems.length === 0){%><p>No items yet.</p><%}%>
 
 
+<div class="dropArea">
+
 <%it.uncollectedItems.forEach(item => {%>
 
 <div class="draggable" draggable="true"><nav>
@@ -52,7 +54,7 @@
 
 </div></nav>
 <%});%>
-
+</div>
 
 <hr>
 
