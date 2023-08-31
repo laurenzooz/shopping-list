@@ -6,4 +6,6 @@
 	margin-top: 1rem;
 	outline-style: dashed;
 	outline-width: thin;
+
+	cursor: move;
 }
