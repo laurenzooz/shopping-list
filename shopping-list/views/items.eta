@@ -29,6 +29,8 @@
 
 
 <%it.uncollectedItems.forEach(item => {%>
+
+<div class="dropArea">Drag here</div>
 <div class="draggable" draggable="true"><nav>
 
 	<ul><li><form method="POST" action="/lists/<%=it.id%>/<%=item.id%>/collect">

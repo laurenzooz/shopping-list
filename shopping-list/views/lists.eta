@@ -29,6 +29,7 @@
 
 
 <%it.lists.forEach(list => {%>
+<div class="dropArea">Drag here</div>
 <div class="draggable" draggable="true"><nav>
 
 
