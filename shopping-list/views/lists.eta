@@ -1,6 +1,7 @@
 <% layout("./layouts/layout.eta") %>
 
 <script src = "static/script/drag-drop.js" defer></script>
+<script src = "static/script/DragDropTouch.js" defer></script>
 
 <h1>Shopping list application</h1>
 
