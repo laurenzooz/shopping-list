@@ -1,5 +1,6 @@
 const draggables = document.querySelectorAll(".draggable"); // All the draggable elements
 const dropArea = document.querySelector(".dropArea"); // only possible to drop within the drop area
+let url = document.URL; // url of currently open page.
 
 draggables.forEach(draggable => {
 	draggable.addEventListener("dragstart", () => {
