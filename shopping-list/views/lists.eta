@@ -32,7 +32,7 @@
 <div class="dropArea">
 
 <%it.lists.forEach(list => {%>
-<nav class="draggable" draggable="true">
+<nav class="draggable" draggable="true"><div id="id"><%=item.id%></div> 
 
     <ul><li><a href = "lists/<%=list.id%>" role="button"><%=list.name%></a></li></ul>
 	
