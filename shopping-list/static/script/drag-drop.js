@@ -1,8 +1,23 @@
 const draggables = document.querySelectorAll(".draggable"); // All the draggable elements
 const dropArea = document.querySelector(".dropArea"); // only possible to drop within the drop area
 let url = document.URL; // url of currently open page.
+const orderArr = []; // int array of shopping list's or shopping list items' ids, 
+// in the same order as they are visible on the page.
 
-draggables.forEach(draggable => {
+function updateOrderArr() {
+	draggables.forEach((draggable) => {
+		const id = draggable.querySelector("#draggableId").textContent;
+		orderArr.push(id);
+	});
+}
+
+updateOrderArr();
+
+console.log(orderArr);
+
+draggables.forEach((draggable) => {
+	
+
 	draggable.addEventListener("dragstart", () => {
 		// dragging starts, change the style
 		draggable.classList.add("dragging");
@@ -10,6 +25,9 @@ draggables.forEach(draggable => {
 	
 	draggable.addEventListener("dragend", () => {
 		draggable.classList.remove("dragging"); 
+		
+		//orderArr.splice(index, 0, draggable.querySelector("#draggableId").textContent);
+		
 	});
 });
 
@@ -17,12 +35,29 @@ dropArea.addEventListener('dragover', e => {
 	const elementBelow = getElementBelow(e.clientY); // get the element below, pass the mouse y pos
 	const draggable = document.querySelector('.dragging'); // the element currently being dragged
 
-	if (elementBelow === null) {// no elements below = this is the lowest element
-		dropArea.appendChild(draggable); // dragged element goes to bottom of the list
+	const draggingId = draggable.querySelector("#draggableId").textContent;
+	let elementBelowId;
+	if (elementBelow) {
+		elementBelowId = elementBelow.querySelector("#draggableId").textContent;
+	}
+	// ids of the elements that are going to be reordered
+
+	const draggingIndex = orderArr.indexOf(draggingId);
 	
+
+	if (typeof (elementBelow) === "undefined") {// no elements below = this is the lowest element
+		dropArea.appendChild(draggable); // dragged element goes to bottom of the list
 	} else { // there is an element found below, set this item above it on the list 
 		dropArea.insertBefore(draggable, elementBelow);
 	}
+
+	if (typeof (elementBelow) === "undefined") { // not defined -> going to be the lowest element
+		orderArr[draggingIndex] = draggables[draggables.length - 1].querySelector("#draggableId").textContent;;
+	} else {
+		orderArr[draggingIndex] = elementBelowId;
+	}
+
+	console.log(orderArr);
 });
 
 
@@ -60,3 +95,21 @@ function getElementBelow(y) {
 	}, {offset: Number.NEGATIVE_INFINITY }).element; 
 }
 
+
+// returns an int array, with id for every shopping list or shopping list item, 
+// in the same order as they are on the page 
+function getItemOrder() {
+	let idArr = [];
+	const reorderedIds = draggables.map(draggable => draggable.draggableId);
+	/*
+	draggables.forEach(element => {
+		const id = element.querySelector("#draggableId").innerHTML;
+		// draggableId only contains the id of the item or shopping list.
+
+		idArr.push(id);
+		console.log(id);
+
+	});
+*/
+	console.log(reorderedIds);
+}
