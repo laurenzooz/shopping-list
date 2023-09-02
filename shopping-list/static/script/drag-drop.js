@@ -4,20 +4,14 @@ let url = document.URL; // url of currently open page.
 const orderArr = []; // int array of shopping list's or shopping list items' ids, 
 // in the same order as they are visible on the page.
 
-function updateOrderArr() {
-	draggables.forEach((draggable) => {
-		const id = draggable.querySelector("#draggableId").textContent;
-		orderArr.push(id);
-	});
-}
+draggables.forEach((draggable) => {
+	const id = draggable.querySelector("#draggableId").textContent;
+	orderArr.push(id);
+});
+// initialize the orderarray
 
-updateOrderArr();
-
-console.log(orderArr);
 
 draggables.forEach((draggable) => {
-	
-
 	draggable.addEventListener("dragstart", () => {
 		// dragging starts, change the style
 		draggable.classList.add("dragging");
@@ -25,18 +19,24 @@ draggables.forEach((draggable) => {
 	
 	draggable.addEventListener("dragend", () => {
 		draggable.classList.remove("dragging"); 
-		updateOrderArr();		
 	});
 });
 
 dropArea.addEventListener('dragover', e => {
 	const elementBelow = getElementBelow(e.clientY); // get the element below, pass the mouse y pos
-	const draggable = document.querySelector('.dragging'); // the element currently being dragged
+	const dragging = document.querySelector('.dragging'); // the element currently being dragged
+	const draggingId = dragging.querySelector('#draggableId').textContent;
 
 	if (typeof (elementBelow) === "undefined") {// no elements below = this is the lowest element
-		dropArea.appendChild(draggable); // dragged element goes to bottom of the list
-	} else { // there is an element found below, set this item above it on the list 
-		dropArea.insertBefore(draggable, elementBelow);
+		dropArea.appendChild(dragging); // dragged element goes to bottom of the list
+		// add the item id to the end of the order array, and remove the old position
+		orderArr.push(draggingId);
+		orderArr.splice(orderArr.indexOf(draggingId), 1);
+
+		console.log(orderArr);
+
+	} else { // there is an element found below, set the dragged element above it
+		dropArea.insertBefore(dragging, elementBelow); // element on the page
 	}
 });
 
