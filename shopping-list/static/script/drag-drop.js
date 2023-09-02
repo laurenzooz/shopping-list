@@ -25,9 +25,7 @@ draggables.forEach((draggable) => {
 	
 	draggable.addEventListener("dragend", () => {
 		draggable.classList.remove("dragging"); 
-		
-		//orderArr.splice(index, 0, draggable.querySelector("#draggableId").textContent);
-		
+		updateOrderArr();		
 	});
 });
 
@@ -35,29 +33,11 @@ dropArea.addEventListener('dragover', e => {
 	const elementBelow = getElementBelow(e.clientY); // get the element below, pass the mouse y pos
 	const draggable = document.querySelector('.dragging'); // the element currently being dragged
 
-	const draggingId = draggable.querySelector("#draggableId").textContent;
-	let elementBelowId;
-	if (elementBelow) {
-		elementBelowId = elementBelow.querySelector("#draggableId").textContent;
-	}
-	// ids of the elements that are going to be reordered
-
-	const draggingIndex = orderArr.indexOf(draggingId);
-	
-
 	if (typeof (elementBelow) === "undefined") {// no elements below = this is the lowest element
 		dropArea.appendChild(draggable); // dragged element goes to bottom of the list
 	} else { // there is an element found below, set this item above it on the list 
 		dropArea.insertBefore(draggable, elementBelow);
 	}
-
-	if (typeof (elementBelow) === "undefined") { // not defined -> going to be the lowest element
-		orderArr[draggingIndex] = draggables[draggables.length - 1].querySelector("#draggableId").textContent;;
-	} else {
-		orderArr[draggingIndex] = elementBelowId;
-	}
-
-	console.log(orderArr);
 });
 
 
