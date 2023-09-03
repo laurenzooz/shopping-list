@@ -11,14 +11,7 @@ const addList = async ({ request, response, user, params, render }) => {
 	const formData = await body.value;
 	const listName = formData.get("list_name");
 
-	let position = 0;
-	const row = await listService.highestPosition(user.id);
-	if (row)
-	{
-		position = row.position + 1;
-	}
-
-	await listService.addList(user.id, position, listName);
+	await listService.addList(user.id, listName);
 
 	response.redirect(`/lists`);
 }
