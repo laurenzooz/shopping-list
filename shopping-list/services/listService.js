@@ -5,7 +5,7 @@ const addList = async(user_id, position, name) => {
 }
 
 const listLists = async(user_id) => { // returns all of the shopping lists of the user
-	return await sql `SELECT * FROM shopping_lists WHERE user_id = ${user_id} ORDER BY position DESC`; // highest order num to lowest
+	return await sql `SELECT * FROM shopping_lists WHERE user_id = ${user_id} ORDER BY position`; // highest order num to lowest
 }
 
 
