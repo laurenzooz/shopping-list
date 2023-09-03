@@ -51,19 +51,20 @@ function updateOrder(){
 
 // sends the order array data, to save the order on database.
 const sendOrderData = async () => {
-	const postUrl = url + `/order`; // the url to send the post request to
-	//const response = await fetch()
-	console.log(postUrl);
-	console.log(JSON.stringify(orderArr));
+	const postUrl = url + `/order`; // the url to send the post request to to reorder the elements in database
 
-	const mess = await fetch(postUrl, {
+	const response = await fetch(postUrl, {
 		method: "POST",
-		headers: {"Content-Type": "application/json",},
-		body: JSON.stringify.orderArr,
+		//body: JSON.stringify.orderArr,
+		headers: {
+			Accept: 'application.json',
+			'Content-Type': 'application/json'
+		  },
+		body: JSON.stringify(orderArr),
 		
 	});
 
-	console.log(mess);
+	console.log(response);
 };
 
 
