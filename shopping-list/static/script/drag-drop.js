@@ -1,7 +1,7 @@
-const draggables = document.querySelectorAll(".draggable"); // All the draggable elements
+let draggables = document.querySelectorAll(".draggable"); // All the draggable elements
 const dropArea = document.querySelector(".dropArea"); // only possible to drop within the drop area
 let url = document.URL; // url of currently open page.
-const orderArr = []; // int array of shopping list's or shopping list items' ids, 
+let orderArr = []; // int array of shopping list's or shopping list items' ids, 
 // in the same order as they are visible on the page.
 
 draggables.forEach((draggable) => {
@@ -9,7 +9,6 @@ draggables.forEach((draggable) => {
 	orderArr.push(id);
 });
 // initialize the orderarray
-
 
 draggables.forEach((draggable) => {
 	draggable.addEventListener("dragstart", () => {
@@ -19,26 +18,36 @@ draggables.forEach((draggable) => {
 	
 	draggable.addEventListener("dragend", () => {
 		draggable.classList.remove("dragging"); 
+		updateOrder(); // update the order array when drag ends
 	});
 });
 
 dropArea.addEventListener('dragover', e => {
 	const elementBelow = getElementBelow(e.clientY); // get the element below, pass the mouse y pos
-	const dragging = document.querySelector('.dragging'); // the element currently being dragged
-	const draggingId = dragging.querySelector('#draggableId').textContent;
+	const dragging = document.querySelector(".dragging"); // the element currently being dragged
 
 	if (typeof (elementBelow) === "undefined") {// no elements below = this is the lowest element
 		dropArea.appendChild(dragging); // dragged element goes to bottom of the list
 		// add the item id to the end of the order array, and remove the old position
-		orderArr.push(draggingId);
-		orderArr.splice(orderArr.indexOf(draggingId), 1);
-
-		console.log(orderArr);
-
 	} else { // there is an element found below, set the dragged element above it
-		dropArea.insertBefore(dragging, elementBelow); // element on the page
+		dropArea.insertBefore(dragging, elementBelow); 
 	}
+
+	// array of elements in the same order they are currently visible in on the page.
+	// get the ids and update order array
+
 });
+
+function updateOrder(){
+	const elementArr = Array.from(dropArea.children);
+	orderArr = []; // empty the array and repopulate it
+	for (let i = 0; i < elementArr.length; i++) {
+		const id = elementArr[i].querySelector("#draggableId").textContent;
+		orderArr.push(id);
+	}
+	console.log(orderArr);
+}
+
 
 
 
@@ -75,21 +84,3 @@ function getElementBelow(y) {
 	}, {offset: Number.NEGATIVE_INFINITY }).element; 
 }
 
-
-// returns an int array, with id for every shopping list or shopping list item, 
-// in the same order as they are on the page 
-function getItemOrder() {
-	let idArr = [];
-	const reorderedIds = draggables.map(draggable => draggable.draggableId);
-	/*
-	draggables.forEach(element => {
-		const id = element.querySelector("#draggableId").innerHTML;
-		// draggableId only contains the id of the item or shopping list.
-
-		idArr.push(id);
-		console.log(id);
-
-	});
-*/
-	console.log(reorderedIds);
-}
