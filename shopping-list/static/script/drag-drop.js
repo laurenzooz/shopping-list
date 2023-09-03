@@ -33,19 +33,15 @@ dropArea.addEventListener('dragover', e => {
 		dropArea.insertBefore(dragging, elementBelow); 
 	}
 
-	// array of elements in the same order they are currently visible in on the page.
-	// get the ids and update order array
-
 });
 
 function updateOrder(){
-	const elementArr = Array.from(dropArea.children);
+	const elementArr = Array.from(dropArea.children); // order of elements
 	orderArr = []; // empty the array and repopulate it
 	for (let i = 0; i < elementArr.length; i++) {
 		const id = elementArr[i].querySelector("#draggableId").textContent;
 		orderArr.push(id);
 	}
-	console.log(orderArr);
 	sendOrderData(); // update the order data on database
 }
 
@@ -64,7 +60,6 @@ const sendOrderData = async () => {
 		
 	});
 
-	console.log(response);
 };
 
 

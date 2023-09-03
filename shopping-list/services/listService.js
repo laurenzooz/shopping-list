@@ -26,9 +26,7 @@ const orderLists = async(newOrder) => { // returns all of the shopping lists of 
 	
 	for (let i = 0; i < newOrder.length; i++) {
 		const id = newOrder[i]; // the id of the list of which position we want to update
-		console.log(id);
 		await sql `UPDATE shopping_lists SET position = ${i} WHERE id = ${id}`;
-		console.log(`id ${id} set to pos ${i}`);
 	}
 }
 
