@@ -46,7 +46,25 @@ function updateOrder(){
 		orderArr.push(id);
 	}
 	console.log(orderArr);
+	sendOrderData(); // update the order data on database
 }
+
+// sends the order array data, to save the order on database.
+const sendOrderData = async () => {
+	const postUrl = url + `/order`; // the url to send the post request to
+	//const response = await fetch()
+	console.log(postUrl);
+	console.log(JSON.stringify(orderArr));
+
+	const mess = await fetch(postUrl, {
+		method: "POST",
+		headers: {"Content-Type": "application/json",},
+		body: JSON.stringify.orderArr,
+		
+	});
+
+	console.log(mess);
+};
 
 
 
