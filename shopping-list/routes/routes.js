@@ -31,6 +31,6 @@ router.post("/lists/:list_id/:item_id/collect", itemController.collectItem);
 router.get("/lists/:list_id/:item_id/uncollect", itemController.uncollectItem); 
 router.post("/lists/:list_id/:item_id/delete", itemController.deleteItem); 
 
-router.post("/lists/:list_id/:item_id/order", itemController.orderItems);
+router.post("/lists/:list_id/order", itemController.orderItems);
  
 export { router };
