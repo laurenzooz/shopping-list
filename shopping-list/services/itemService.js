@@ -1,13 +1,12 @@
 import {sql} from "../database/database.js";
 
 
-const addItem = async(name, position, id) => { // adds new item to the list by id
-
-    await sql `INSERT INTO shopping_list_items (shopping_list_id, position, name) VALUES (${ id }, ${position}, ${ name })`;
+const addItem = async(name, id) => { // adds new item to the list by id
+    await sql `INSERT INTO shopping_list_items (shopping_list_id, position, name) VALUES (${ id }, -1, ${ name })`;
 }
 
 const listUncollectedItems = async(id) => { 
-	return await sql `SELECT * FROM shopping_list_items WHERE shopping_list_id = ${id} and collected = false ORDER BY position DESC`;	
+	return await sql `SELECT * FROM shopping_list_items WHERE shopping_list_id = ${id} and collected = false ORDER BY position`;	
 }
 
 const listCollectedItems = async(id) => { 
@@ -58,42 +57,12 @@ const deleteItem = async(list_id, user_id, item_id) => {
 	
 }
 
-
-// returns the highest order number
-const highestPosition = async(list_id) => { 
-	const rows = await sql `SELECT * FROM shopping_list_items WHERE shopping_list_id = ${list_id} ORDER BY position DESC`;
-	return rows[0];
-}
-
-const lowestPosition = async(list_id) => { 
-	const rows = await sql `SELECT * FROM shopping_list_items WHERE shopping_list_id = ${list_id} ORDER BY position ASC`;
-	return rows[0];
-}
-
-// Swap the position value with one above
-const moveUp = async(item_id, upperLimit) => { 
-
+const orderItems = async(newOrder) => { // returns all of the shopping lists of the user
 	
-
-	const rows = await sql `SELECT * FROM shopping_list_items WHERE id = ${item_id}`;
-	const thisRow = rows[0]
-
-
-	if (thisRow.position < upperLimit) {
-		await sql`UPDATE shopping_list_items SET position = ${thisRow.position} 		WHERE position = ${thisRow.position} + 1`;
-		await sql`UPDATE shopping_list_items SET position = ${thisRow.position} + 1  WHERE id = ${item_id}`;
+	for (let i = 0; i < newOrder.length; i++) {
+		const id = newOrder[i]; // the id of the list of which position we want to update
+		await sql `UPDATE shopping_list_items SET position = ${i} WHERE id = ${id}`;
 	}
 }
 
-const moveDown = async(item_id) => { 
-
-	const rows = await sql `SELECT * FROM shopping_list_items WHERE id = ${item_id}`;
-	const thisRow = rows[0]
-
-	if (thisRow.position > 0) {
-		await sql`UPDATE shopping_list_items SET position = ${thisRow.position} 		WHERE position = ${thisRow.position} - 1`;
-		await sql`UPDATE shopping_list_items SET position = ${thisRow.position} - 1  WHERE id = ${item_id}`;
-	}
-}
-
-export { addItem, listUncollectedItems, listCollectedItems, collectItem, uncollectItem, deleteItem, highestPosition, lowestPosition, moveUp, moveDown }
+export { addItem, listUncollectedItems, listCollectedItems, collectItem, uncollectItem, deleteItem, orderItems }

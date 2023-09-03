@@ -17,14 +17,7 @@ const addItem = async ({ request, response, params, render }) => {
 	const formData = await body.value;
 	const itemName = formData.get("item_name");
 
-	let position = 0;
-	const row = await itemService.highestPosition(params.id);
-	if (row)
-	{
-		position = row.position + 1;
-	}
-
-	await itemService.addItem(itemName, position, params.id);
+	await itemService.addItem(itemName, params.id);
 	
 	response.redirect(`/lists/${params.id}`);
 }
@@ -49,6 +42,7 @@ const orderItems = async ({ request, response, params, render }) => {
     const data = await body.value;
 	
 	if (body) {
+		await itemService.orderItems(data);
 		response.status = 200;
 	} else {
 		response.status = 404;
