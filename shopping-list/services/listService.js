@@ -1,7 +1,9 @@
 import {sql} from "../database/database.js";
 
 const addList = async(user_id, name) => {
-	await sql `INSERT INTO shopping_lists (user_id, position, name) VALUES (${user_id}, -1, ${name})`;
+	await sql `INSERT INTO shopping_lists (user_id, position, name) VALUES (${user_id}, 999, ${name})`;
+	// 'Infinity' didn't work, use 999 temporarily so new items gets added to bottom of the list
+
 }
 
 const listLists = async(user_id) => { // returns all of the shopping lists of the user

@@ -2,7 +2,8 @@ import {sql} from "../database/database.js";
 
 
 const addItem = async(name, id) => { // adds new item to the list by id
-    await sql `INSERT INTO shopping_list_items (shopping_list_id, position, name) VALUES (${ id }, -1, ${ name })`;
+    await sql `INSERT INTO shopping_list_items (shopping_list_id, position, name) VALUES (${ id }, 999, ${ name })`;
+	// 'Infinity' didn't work, use 999 temporarily so new items gets added to bottom of the list
 }
 
 const listUncollectedItems = async(id) => { 
