@@ -44,29 +44,17 @@ const deleteItem = async ({ request, response, params, render, user }) => {
 	response.redirect(`/lists/${params.list_id}`);
 }
 
-
-const moveUp = async ({ request, response, params, render }) => {
+const orderItems = async ({ request, response, params, render }) => {
+	const body = request.body({ type: "json" });
+    const data = await body.value;
 	
-	let limit = 0;
-	const row = await itemService.highestPosition(params.list_id);
-	if (row)
-	{
-		limit = row.position;
-	}
-
-	await itemService.moveUp(params.item_id, limit);
- 
-	response.redirect(`/lists/${params.list_id}`);
-}
-
-const moveDown = async ({ request, response, params, render }) => {
-	
-
-	await itemService.moveDown(params.item_id);
- 
-	response.redirect(`/lists/${params.list_id}`);
-}
+	if (body) {
+		response.status = 200;
+	} else {
+		response.status = 404;
+	}	
+} 
 
 
-export { showItems, addItem, collectItem, uncollectItem, deleteItem, moveUp, moveDown };
+export { showItems, addItem, collectItem, uncollectItem, deleteItem, orderItems };
 	
