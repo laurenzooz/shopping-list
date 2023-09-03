@@ -1,5 +1,8 @@
 <% layout("./layouts/layout.eta") %>
 
+<script src = "/static/script/drag-drop.js" defer></script>
+<script src = "/static/script/DragDropTouch.js" defer></script>
+
 <h1>Shopping list application</h1>
 
 <nav>
@@ -26,25 +29,20 @@
 <% if (it.lists.length === 0){%><p>No shopping lists yet.</p><%}%>
 
 
+<div class="dropArea">
+
 <%it.lists.forEach(list => {%>
-<nav>
+<nav class="draggable" draggable="true"><div id="draggableId"><%=list.id%></div> 
 
     <ul><li><a href = "lists/<%=list.id%>" role="button"><%=list.name%></a></li></ul>
 	
 	<ul><li><form method = "POST" action = "/lists/<%=list.id%>/delete">
-	<input type = "submit" role="button" class = "secondary outline" value = "X" />
+	<input type = "submit" role="button" class = "secondary outline" value = "Delete" />
 	</form></li>
-
-	<li><form method = "POST" action = "/lists/<%=list.id%>/up">
-    <input type = "submit" role="button" class = "secondary outline" value = "↑" />
-	</form></li>
-
-	<li><form method = "POST" action = "/lists/<%=list.id%>/down">
-    <input type = "submit" role="button" class = "secondary outline" value = "↓" />
-	</form></li></ul>
+	</ul>
 </nav>
-
 <%});%>
+</div>
 
 <hr> 
 

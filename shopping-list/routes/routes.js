@@ -21,8 +21,7 @@ router.get("/lists", listController.showLists); // user's shopping lists
 router.post("/lists", listController.addList); // Create a new shopping list
 router.post("/lists/:id/delete", listController.deleteList);
 
-router.post("/lists/:id/up", listController.moveUp); // change the order
-router.post("/lists/:id/down", listController.moveDown);
+router.post("/lists/order", listController.orderLists);
 
 // items in lists
 router.get("/lists/:id", itemController.showItems);
@@ -32,7 +31,6 @@ router.post("/lists/:list_id/:item_id/collect", itemController.collectItem);
 router.get("/lists/:list_id/:item_id/uncollect", itemController.uncollectItem); 
 router.post("/lists/:list_id/:item_id/delete", itemController.deleteItem); 
 
-router.post("/lists/:list_id/:item_id/up", itemController.moveUp); // sort
-router.post("/lists/:list_id/:item_id/down", itemController.moveDown); 
+router.post("/lists/:list_id/order", itemController.orderItems);
  
 export { router };

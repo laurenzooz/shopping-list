@@ -49,4 +49,7 @@ The database schema is as follows:
 	CREATE UNIQUE INDEX ON users((lower(email)));
 
 
+## Credits
+Thanks to Bernardo-Castilho for making drag and drop on mobile so easy to implement!
+https://github.com/Bernardo-Castilho/dragdroptouch
 		

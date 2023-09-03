@@ -1,5 +1,10 @@
 <% layout("./layouts/layout.eta") %>
 
+<script src = "/static/script/drag-drop.js" defer></script>
+<script src = "/static/script/DragDropTouch.js" defer></script>
+
+
+
 <h1>Shopping list application</h1>
 
 <nav>
@@ -25,28 +30,23 @@
 <% if (it.uncollectedItems.length === 0 && it.collectedItems.length === 0){%><p>No items yet.</p><%}%>
 
 
+<div class="dropArea">
+
 <%it.uncollectedItems.forEach(item => {%>
-<nav>
+
+<nav class="draggable" draggable="true"><div id="draggableId"><%=item.id%></div> 
 
 	<ul><li><form method="POST" action="/lists/<%=it.id%>/<%=item.id%>/collect">
 	<input type="submit" value="<%= item.name %>" />
 	</form></li></ul>
 
 	<ul><li><form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/delete">
-    <input type = "submit" role="button" class = "secondary outline" value = "X" />
-	</form></li>
-
-	<li><form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/up">
-    <input type = "submit" role="button" class = "secondary outline" value = "↑" />
-	</form></li>
-
-	<li><form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/down">
-    <input type = "submit" role="button" class = "secondary outline" value = "↓" />
+    <input type = "submit" role="button" class = "secondary outline" value = "Delete" />
 	</form></li></ul>
 
 </nav>
 <%});%>
-
+</div>
 
 <hr>
 

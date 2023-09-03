@@ -11,14 +11,7 @@ const addList = async ({ request, response, user, params, render }) => {
 	const formData = await body.value;
 	const listName = formData.get("list_name");
 
-	let position = 0;
-	const row = await listService.highestPosition(user.id);
-	if (row)
-	{
-		position = row.position + 1;
-	}
-
-	await listService.addList(user.id, position, listName);
+	await listService.addList(user.id, listName);
 
 	response.redirect(`/lists`);
 }
@@ -31,27 +24,17 @@ const deleteList = async ({ request, response, params, render, user }) => {
 	response.redirect(`/lists`);
 }
 
-const moveUp = async ({ request, response, params, render, user }) => {
-	
-	let limit = 0;
-	const row = await listService.highestPosition(user.id);
-	if (row)
-	{
-		limit = row.position;
-	}
+const orderLists = async ({ request, response, params, render }) => {
+	const body = request.body({ type: "json" });
+    const data = await body.value; // array containing the list ids, in the new order that 
+	// needs to be saved.
+	if (body) {
+		await listService.orderLists(data);
+		response.status = 200;
+	} else {
+		response.status = 404;
+	}	
+} 
 
-	await listService.moveUp(params.id, limit);
- 
-	response.redirect(`/lists`);
-}
-
-const moveDown = async ({ request, response, params, render, user }) => {
-	
-
-	await listService.moveDown(params.id);
- 
-	response.redirect(`/lists`);
-}
-
-export { showLists, addList, deleteList, moveUp, moveDown };
+export { showLists, addList, deleteList, orderLists };
 	

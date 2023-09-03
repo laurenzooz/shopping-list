@@ -17,14 +17,7 @@ const addItem = async ({ request, response, params, render }) => {
 	const formData = await body.value;
 	const itemName = formData.get("item_name");
 
-	let position = 0;
-	const row = await itemService.highestPosition(params.id);
-	if (row)
-	{
-		position = row.position + 1;
-	}
-
-	await itemService.addItem(itemName, position, params.id);
+	await itemService.addItem(itemName, params.id);
 	
 	response.redirect(`/lists/${params.id}`);
 }
@@ -44,29 +37,18 @@ const deleteItem = async ({ request, response, params, render, user }) => {
 	response.redirect(`/lists/${params.list_id}`);
 }
 
-
-const moveUp = async ({ request, response, params, render }) => {
+const orderItems = async ({ request, response, params, render }) => {
+	const body = request.body({ type: "json" });
+    const data = await body.value;
 	
-	let limit = 0;
-	const row = await itemService.highestPosition(params.list_id);
-	if (row)
-	{
-		limit = row.position;
-	}
-
-	await itemService.moveUp(params.item_id, limit);
- 
-	response.redirect(`/lists/${params.list_id}`);
-}
-
-const moveDown = async ({ request, response, params, render }) => {
-	
-
-	await itemService.moveDown(params.item_id);
- 
-	response.redirect(`/lists/${params.list_id}`);
-}
+	if (body) {
+		await itemService.orderItems(data);
+		response.status = 200;
+	} else {
+		response.status = 404;
+	}	
+} 
 
 
-export { showItems, addItem, collectItem, uncollectItem, deleteItem, moveUp, moveDown };
+export { showItems, addItem, collectItem, uncollectItem, deleteItem, orderItems };
 	
