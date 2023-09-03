@@ -2,6 +2,7 @@
 
 <script src = "/static/script/drag-drop.js" defer></script>
 <script src = "/static/script/DragDropTouch.js" defer></script>
+<script src = "/static/script/edit-mode.js" defer></script>
 
 
 
@@ -41,7 +42,7 @@
 	</form></li></ul>
 
 	<ul><li><form method = "POST" action = "/lists/<%=it.id%>/<%=item.id%>/delete">
-    <input type = "submit" role="button" class = "secondary outline" value = "Delete" />
+    <input type = "submit" role="button" class = "secondary outline" value = "Delete" id="isEditMode" style="display:none;"/>
 	</form></li></ul>
 
 </nav>
@@ -64,7 +65,7 @@
 
 
 <label>
-    <input type="checkbox" role="switch" />Edit
+    <input type="checkbox" role="switch" id="editMode"/>Edit
 </label>
 
 <form method = "POST" action = "/lists/<%=it.id%>">
