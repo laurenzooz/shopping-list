@@ -31,40 +31,16 @@ const deleteList = async ({ request, response, params, render, user }) => {
 	response.redirect(`/lists`);
 }
 
-const orderList = async ({ request, response, params, render }) => {
+const orderLists = async ({ request, response, params, render }) => {
 	const body = request.body({ type: "json" });
     const data = await body.value;
-	console.log(data);
-
+	
 	if (body) {
 		response.status = 200;
 	} else {
 		response.status = 404;
-	}
-	
+	}	
 } 
 
-const moveUp = async ({ request, response, params, render, user }) => {
-	
-	let limit = 0;
-	const row = await listService.highestPosition(user.id);
-	if (row)
-	{
-		limit = row.position;
-	}
-
-	await listService.moveUp(params.id, limit);
- 
-	response.redirect(`/lists`);
-}
-
-const moveDown = async ({ request, response, params, render, user }) => {
-	
-
-	await listService.moveDown(params.id);
- 
-	response.redirect(`/lists`);
-}
-
-export { showLists, addList, deleteList, moveUp, moveDown, orderList };
+export { showLists, addList, deleteList, orderLists };
 	
