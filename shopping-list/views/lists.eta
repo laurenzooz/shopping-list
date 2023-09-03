@@ -47,7 +47,7 @@
 <hr> 
 
 <label>
-    <input type="checkbox" role="switch" />Edit
+    <input type="checkbox" role="switch" id="editMode"/>Edit
 </label>
 
 <form method = "POST" action = "/lists">

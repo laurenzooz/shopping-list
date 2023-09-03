@@ -68,7 +68,7 @@
 </label>
 
 <form method = "POST" action = "/lists/<%=it.id%>">
-    Add an item to the list:<input type = "text" name = "item_name"/>
+    Add an item to the list:<input type = "text" name = "item_name" id="editMode"/>Edit/>
 
 	
     <div style="width: 30%;"><input type = "submit" value = "Add" /></div>
