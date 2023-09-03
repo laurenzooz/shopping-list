@@ -22,45 +22,19 @@ const deleteList = async(list_id, user_id) => {
 	
 }
 
-
-
-// returns the highest order number of the lists the user with user_id has
-const highestPosition = async(user_id) => { 
-	const rows = await sql `SELECT * FROM shopping_lists WHERE user_id = ${user_id} ORDER BY position DESC`;
-	return rows[0];
-}
-
-const lowestPosition = async(user_id) => { 
-	const rows = await sql `SELECT * FROM shopping_lists WHERE user_id = ${user_id} ORDER BY position ASC`;
-	return rows[0];
-}
-
-// Swap the position value with one above
-const moveUp = async(list_id, upperLimit) => { 
-
-	const rows = await sql `SELECT * FROM shopping_lists WHERE id = ${list_id}`;
-	const thisRow = rows[0]
-
-	if (thisRow.position < upperLimit) {
-		await sql`UPDATE shopping_lists SET position = ${thisRow.position} 		WHERE position = ${thisRow.position} + 1`;
-		await sql`UPDATE shopping_lists SET position = ${thisRow.position} + 1  WHERE id = ${list_id}`;
-	}
-}
-
-const moveDown = async(list_id) => { 
-
-	const rows = await sql `SELECT * FROM shopping_lists WHERE id = ${list_id}`;
-	const thisRow = rows[0]
-
-	if (thisRow.position > 0) {
-		await sql`UPDATE shopping_lists SET position = ${thisRow.position} 		WHERE position = ${thisRow.position} - 1`;
-		await sql`UPDATE shopping_lists SET position = ${thisRow.position} - 1  WHERE id = ${list_id}`;
-	}
+const orderLists = async(newOrder) => { // returns all of the shopping lists of the user
 	
-
+	for (let i = 0; i < newOrder.length; i++) {
+		const id = newOrder[i]; // the id of the list of which position we want to update
+		console.log(id);
+		await sql `UPDATE shopping_lists SET position = ${i} WHERE id = ${id}`;
+		console.log(`id ${id} set to pos ${i}`);
+	}
 }
 
 
 
 
-export { addList, listLists, deleteList, highestPosition, lowestPosition, moveUp, moveDown }
+
+
+export { addList, listLists, deleteList, orderLists }

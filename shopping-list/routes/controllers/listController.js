@@ -33,9 +33,10 @@ const deleteList = async ({ request, response, params, render, user }) => {
 
 const orderLists = async ({ request, response, params, render }) => {
 	const body = request.body({ type: "json" });
-    const data = await body.value;
-	
+    const data = await body.value; // array containing the list ids, in the new order that 
+	// needs to be saved.
 	if (body) {
+		await listService.orderLists(data);
 		response.status = 200;
 	} else {
 		response.status = 404;
