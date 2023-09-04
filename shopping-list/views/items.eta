@@ -35,7 +35,7 @@
 
 <%it.uncollectedItems.forEach(item => {%>
 
-<nav class="draggable" draggable="true"><div id="draggableId"><%=item.id%></div> 
+<nav class="draggable" draggable="false"><div id="draggableId"><%=item.id%></div> 
 
 	<ul><li><form method="POST" action="/lists/<%=it.id%>/<%=item.id%>/collect">
 	<input type="submit" value="<%= item.name %>" />
