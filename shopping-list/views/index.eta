@@ -29,7 +29,8 @@ where you can create new shopping lists as well as manage existing ones.
 Open the list by clicking its name to add and manage items on that specific list.
 Click the item name to mark it as collected. If you collect an item by accident, you can 
 retrieve it by clicking the item name with the red striked-through text.</p>
-<p>You can change the order of the items by dragging them.</p>
+<p>If you want to delete or reorder lists or items, you need to enable edit mode.
+Once you are in edit mode, you can drag the items to reorder them.</p>
 <p>Check out this project's Github repository as well as my other projects   
 <a href = "https://github.com/laurenzooz/shopping-list">here</a>.</p>
 
