@@ -1,5 +1,5 @@
 # Shopping list web application
-This is a simple shopping list web application written in JavaScript using Deno runtime, Oak framework, PostgreSQL and Pico.css. 
+This is a simple shopping list web application written in JavaScript using Deno runtime, Oak framework, PostgreSQL and Pico.css stylesheet. 
 
 ## Online location
 You can try and use the web application here: https://shopping-list-n0xf.onrender.com/
