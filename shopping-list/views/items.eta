@@ -68,6 +68,17 @@
     <input type="checkbox" role="switch" id="editMode"/>Edit
 </label>
 
+
+<% if (it.errors) { %>
+<ul>
+	<% Object.keys(it.errors).forEach((attribute) => { %>
+		<% Object.values(it.errors[attribute]).forEach((err) => { %>
+			<li><%= err %></li>
+		<% }); %>
+	<% }); %>
+</ul>
+<% } %>
+
 <form method = "POST" action = "/lists/<%=it.id%>">
     Add an item to the list:<input type = "text" name = "item_name" id="editMode"/>
 
