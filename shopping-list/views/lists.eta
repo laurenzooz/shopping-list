@@ -52,6 +52,16 @@
     <input type="checkbox" role="switch" id="editMode"/>Edit
 </label>
 
+<% if (it.errors) { %>
+<ul>
+	<% Object.keys(it.errors).forEach((attribute) => { %>
+		<% Object.values(it.errors[attribute]).forEach((err) => { %>
+			<li><%= err %></li>
+		<% }); %>
+	<% }); %>
+</ul>
+<% } %>
+
 <form method = "POST" action = "/lists">
     Create a new shopping list:<input type = "text" name = "list_name"/>
     <div style="width: 30%;"><input type = "submit" value = "Create" /></div>
