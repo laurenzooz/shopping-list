@@ -16,3 +16,5 @@ app.use(serveStaticFiles);
 app.use(router.routes());
 
 app.listen({ port: 7777 });
+
+export { app };
