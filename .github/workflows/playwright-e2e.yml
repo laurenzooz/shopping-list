@@ -14,16 +14,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Wait for application to be ready
+    - name: Start services
+      run: docker-compose up -d
+
+    - name: Debugging
       run: |
-        for i in {1..30}; do
-          if curl -s http://localhost:7777 > /dev/null; then
-            break
-          else
-            echo "Waiting for application to be ready..."
-            sleep 10
-          fi
-        done
+        docker ps -a
+        docker network ls
+        docker network inspect shopping-list_default
+        curl -v http://localhost:7777
 
     - name: Run test
       run: docker-compose run --entrypoint=npx e2e-playwright playwright test
