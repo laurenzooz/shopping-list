@@ -9,7 +9,7 @@ on:
     - main
 
 jobs:
-  docker:
+  playwright:
     timeout-minutes: 10
     runs-on: ubuntu-latest
 
@@ -25,11 +25,9 @@ jobs:
     - name: Install Playwright
       run: npx playwright install --with-deps
 
-    - name: Start containers
-      run: docker-compose up -d
-
-    - name: Wait for application to start
-      run: sleep 10
-
-    - name: Start test
+    - name: Run test
       run: docker-compose run --entrypoint=npx e2e-playwright playwright test
+
+    - name: Clean
+      run: docker-compose rm -sf
+
