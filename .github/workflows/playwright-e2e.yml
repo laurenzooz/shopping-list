@@ -14,15 +14,5 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Start services
-      run: docker-compose up -d
-
-    - name: Debugging
-      run: |
-        docker ps -a
-        docker network ls
-        docker network inspect shopping-list_default
-        curl -v http://host.docker.internal:7777
-
     - name: Run test
       run: docker-compose run --entrypoint=npx e2e-playwright playwright test
