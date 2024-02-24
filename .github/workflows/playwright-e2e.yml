@@ -1,9 +1,21 @@
-steps:
-  # need checkout before using docker-compose-action
-  - uses: actions/checkout@v3
-  - uses: adambirds/docker-compose-action@v1.3.0
-    with:
-      up-flags: "--entrypoint=npx"
-      down-flags: "--volumes"
-      test-container: laurenzooz-shopping-list-db
-      test-command: "e2e-playwright playwright test"
+name: Playwright e2e
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - uses: adambirds/docker-compose-action@v1.3.0
+        with:
+          up-flags: "--entrypoint=npx"
+          down-flags: "--volumes"
+          test-container: laurenzooz-shopping-list-db
+          test-command: "e2e-playwright playwright test"
