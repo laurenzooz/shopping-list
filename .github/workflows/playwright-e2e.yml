@@ -24,9 +24,18 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-buildx-
 
+    
+
     - name: Build and run Docker Compose
       run: |
         docker-compose up -d
+
+    - name: Debugging
+      run: |
+        docker ps -a
+        docker network ls
+        docker network inspect shopping-list_default
+        curl -v http://localhost:7777
 
     - name: Run e2e tests
       run: |
