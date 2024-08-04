@@ -20,7 +20,7 @@ const processLogin = async ({ request, response, state }) => {
 	}
 
 	const user = userFromDatabase[0];
-	const passwordMatches = await bcrypt.compare(params.get("password"), user.password);
+	const passwordMatches = await bcrypt.compareSync(params.get("password"), user.password);
 
 	if (!passwordMatches) {
 		loginError = "Wrong email or password";
