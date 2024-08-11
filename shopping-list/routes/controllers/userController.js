@@ -20,7 +20,7 @@ const processLogin = async ({ request, response, state }) => {
 	}
 
 	const user = userFromDatabase[0];
-	const passwordMatches = await bcrypt.compareSync(params.get("password"), user.password);
+	const passwordMatches = bcrypt.compareSync(params.get("password"), user.password);
 
 	if (!passwordMatches) {
 		loginError = "Wrong email or password";
@@ -66,7 +66,7 @@ const registerUser = async ({ request, response, render, user }) => {
 		data.errors = errors;
 		render("register.eta", data, {is_logged: (user)});
 	} else {
-		await userService.addUser(data.email, await bcrypt.hash(data.password));
+		userService.addUser(data.email, bcrypt.hashSync(data.password));
 		data.user_exists = false;
 		response.redirect("/auth/login");
 	}
