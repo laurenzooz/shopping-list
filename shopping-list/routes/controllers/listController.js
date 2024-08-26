@@ -9,7 +9,7 @@ const showLists = async ({ render, user }) => {
 
 const validationRules = { name: [required, minLength(1)] };
 
-const addList = async ({ request, response, user, params, render }) => {
+const addList = async ({ request, response, user, render }) => {
 
 	// name of the new shopping list
 	const body = request.body({ type: "form" });
@@ -32,7 +32,7 @@ const addList = async ({ request, response, user, params, render }) => {
 	
 }
 	
-const deleteList = async ({ request, response, params, render, user }) => {
+const deleteList = async ({ response, params, user }) => {
 	
 
 	await listService.deleteList(params.id, user.id);
@@ -40,7 +40,29 @@ const deleteList = async ({ request, response, params, render, user }) => {
 	response.redirect(`/lists`);
 }
 
-const orderLists = async ({ request, response, params, render }) => {
+const renameList = async ({ request, response, params, user }) => {
+	
+
+	// name of the new shopping list
+	const body = request.body({ type: "form" });
+	const formData = await body.value;
+	
+	const listName = formData.get("list_name");
+
+	let data = { name: listName, errors: null, lists: await listService.listLists(user.id), is_logged: (user)};
+	const [passes, errors] = await validate(data, validationRules);
+
+	if (!passes) { 
+		data.errors = errors;
+		render("lists.eta", data);
+	}
+	else {
+		await listService.renameList(params.id, user.id, listName);
+		response.redirect(`/lists`);
+	}
+}
+
+const orderLists = async ({ request, response }) => {
 	const body = request.body({ type: "json" });
     const data = await body.value; // array containing the list ids, in the new order that 
 	// needs to be saved.
@@ -52,5 +74,5 @@ const orderLists = async ({ request, response, params, render }) => {
 	}	
 } 
 
-export { showLists, addList, deleteList, orderLists };
+export { showLists, addList, deleteList, renameList, orderLists };
 	
