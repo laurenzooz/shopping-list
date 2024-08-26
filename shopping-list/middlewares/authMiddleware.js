@@ -1,11 +1,13 @@
 const restrictedPaths = ["/lists"];
 
 const authMiddleware = async (context, next) => {
-  const user = await context.state.session.get("user");
+  // Get user from cookies
+  const user = await context.cookies.get("user");
 
   if (user) {
-    context.user = user;
+    context.user = JSON.parse(user); 
   }
+
 
   if (
     !user && restrictedPaths.some((path) =>

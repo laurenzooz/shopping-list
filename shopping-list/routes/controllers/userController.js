@@ -6,7 +6,7 @@ const validationRules = { email: [required, isEmail], password: [required, minLe
 
 let loginError = ""; // empty message by default, if problem with logging in this gets populated
 
-const processLogin = async ({ request, response, state }) => {
+const processLogin = async ({ request, response, cookies }) => {
 	const body = request.body({ type: "form" });
 	const params = await body.value;
 
@@ -28,8 +28,13 @@ const processLogin = async ({ request, response, state }) => {
 		return;
 	}
 
-	await state.session.set("user", user);
-	loginError = ""; // reset errors to empty
+	const cookieData = JSON.stringify(user); // Convert user data to JSON format
+	cookies.set("user", cookieData, {
+    httpOnly: true,          // Secure the cookie so it's not accessible via client-side JavaScript
+    sameSite: "Strict",       // Strictly limits when the cookie can be sent with cross-site requests
+    secure: false,            // Set this to true if you're using HTTPS (false for HTTP)
+    maxAge: 60 * 60 * 24 * 7, // Cookie expiration time (e.g., 1 week)
+  	});
 	response.redirect("/");
 }
 
