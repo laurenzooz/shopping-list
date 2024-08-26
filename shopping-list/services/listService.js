@@ -24,6 +24,18 @@ const deleteList = async(list_id, user_id) => {
 	
 }
 
+
+const renameList = async(list_id, user_id, name) => { 
+
+	// check that the user id matches
+	const list = await sql `SELECT * FROM shopping_lists WHERE id = ${list_id}`;
+	
+	if (list[0].user_id === user_id) {
+		await sql `UPDATE shopping_lists SET name = ${name} WHERE id = ${list_id}`;
+	}
+	
+}
+
 const orderLists = async(newOrder) => { // returns all of the shopping lists of the user
 	
 	for (let i = 0; i < newOrder.length; i++) {
@@ -37,4 +49,4 @@ const orderLists = async(newOrder) => { // returns all of the shopping lists of 
 
 
 
-export { addList, listLists, deleteList, orderLists }
+export { addList, listLists, deleteList, orderLists, renameList }
