@@ -36,9 +36,27 @@ const addItem = async ({ request, response, params, render, user }) => {
 	} else {
 		await itemService.addItem(itemName, params.id);
 		response.redirect(`/lists/${params.id}`);
-	}
+	}	
+}
 
+const renameItem = async ({ request, response, params, user }) => {
+	// name of the new shopping list
+	const body = request.body({ type: "form" });
+	const formData = await body.value;
 	
+	const itemName = formData.get("item_name");
+
+	let data = { name: itemName, errors: null, lists: await itemService.listUncollectedItems(params.list_id), is_logged: (user)};
+	const [passes, errors] = await validate(data, validationRules);
+
+	if (!passes) { 
+		data.errors = errors;
+		render("items.eta", data);
+	}
+	else {
+		await itemService.renameItem(params.list_id, user.id, params.item_id, itemName);
+		response.redirect(`/lists/${params.list_id}`);
+	}
 }
 
 const collectItem = async ({ request, response, params, render, user }) => {	
@@ -69,5 +87,5 @@ const orderItems = async ({ request, response, params, render }) => {
 } 
 
 
-export { showItems, addItem, collectItem, uncollectItem, deleteItem, orderItems };
+export { showItems, addItem, renameItem, collectItem, uncollectItem, deleteItem, orderItems };
 	
