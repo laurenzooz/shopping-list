@@ -1,5 +1,6 @@
 const checkbox = document.getElementById("editMode");
 const showOnlyInEdit = document.querySelectorAll("#isEditMode"); // these elements are hidden if not in edit mode 
+const showOnlyInNormal = document.querySelectorAll("#isNormalMode"); // these elements are hidden in edit mode
 
 function checkboxChange(){
 	draggables.forEach((draggable) => {
@@ -19,6 +20,14 @@ function checkboxChange(){
 			element.style.display = "block";
 		} else {
 			element.style.display = "none";
+		}
+	});
+
+	showOnlyInNormal.forEach((element) => {
+		if (checkbox.checked) { // show delete button only when checkbox checked
+			element.style.display = "none";
+		} else {
+			element.style.display = "block";
 		}
 	});
 
