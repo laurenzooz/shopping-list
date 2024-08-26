@@ -30,10 +30,10 @@ const processLogin = async ({ request, response, cookies }) => {
 
 	const cookieData = JSON.stringify(user); // Convert user data to JSON format
 	cookies.set("user", cookieData, {
-    httpOnly: true,          // Secure the cookie so it's not accessible via client-side JavaScript
-    sameSite: "Strict",       // Strictly limits when the cookie can be sent with cross-site requests
-    secure: false,            // Set this to true if you're using HTTPS (false for HTTP)
-    maxAge: 60 * 60 * 24 * 7, // Cookie expiration time (e.g., 1 week)
+    httpOnly: true,   
+    sameSite: "Strict",  
+    secure: false,   
+    maxAge: 60 * 60 * 24 * 7, 
   	});
 	response.redirect("/");
 }
