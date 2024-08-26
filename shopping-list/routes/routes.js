@@ -20,6 +20,7 @@ router.post("/auth/register", userController.registerUser);
 router.get("/lists", listController.showLists); // user's shopping lists
 router.post("/lists", listController.addList); // Create a new shopping list
 router.post("/lists/:id/delete", listController.deleteList);
+router.post("/lists/:id/rename", listController.renameList);
 
 router.post("/lists/order", listController.orderLists);
 
