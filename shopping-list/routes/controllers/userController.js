@@ -28,7 +28,7 @@ const processLogin = async ({ request, response, cookies }) => {
 		return;
 	}
 
-	const cookieData = JSON.stringify(user); // Convert user data to JSON format
+	const cookieData = JSON.stringify(user); 
 	cookies.set("user", cookieData, {
     httpOnly: true,   
     sameSite: "Strict",  
@@ -42,9 +42,9 @@ const showLoginForm = async ({ render, user }) => {
 	render("login.eta", {loginError: loginError, is_logged: (user)});
 }
 
-const logout = async ({ render, user, response, state }) => {
+const logout = async ({ cookies, response }) => {
 	
-	await state.session.deleteSession(user);
+	cookies.delete("user");
 	response.redirect("/");
 }
 
